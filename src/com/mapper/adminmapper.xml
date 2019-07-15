@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.adminmapper">
+    <select id="getadminbyid" resultType="admins">
+        select adminid,adminName,adminPass from admins where adminid =#{adminid};
+    </select>
+    <!--<select id="getadminbyidresultmap" resultMap="admins">-->
+        <!--select * from admins where adminid =#{id};-->
+    <!--</select>-->
+    <insert id="addadmin">
+    INSERT INTO admins(adminName,adminPass) VALUES (#{admins.adminname},#{admins.adminpass});
+    </insert>
+    <update id="updataadminbyid">
+    update admins  set adminName = #{admins.adminname},adminPass = #{admins.adminpass} where adminId = #{admins.adminId};
+    </update>
+    <delete id="deleteadminbyid">
+        delete from admins where adminid = #{id};
+    </delete>
+    <select id="checkadmin" resultType="Boolean">
+    select case
+    when exists (select adminName adminPass from admins where adminName = #{name} and adminPass=#{psd})
+    then
+    1
+    else 0 end as result;
+    </select>
+    <select id="getadminbynamepsd" resultType="admins">
+    select * from admins where adminName =#{name} and adminPass=#{psd};
+
+    </select>
+    <select id="findadminByname" resultType="admins">
+        select * from admins where adminname like '%${name}%';
+    </select>
+
+    <select id="countall" resultType="String">
+        select count(*) from admins;
+    </select>
+
+    <!--弃用-->
+    <!--<select id="getUser" resultType="User">-->
+    <!--select * from tb_users where username=#{username}-->
+    <!--</select>-->
+    <!--<select id="addUser">-->
+    <!--INSERT INTO tb_users(username,password,profile,lasttime,recenttime,lastip,recentip,permission) VALUES (#{username}, #{password},#{profile},#{lasttime},#{recenttime},#{lastip},#{recentip})-->
+    <!--</select>-->
+    <!--<delete id="deleteUser">-->
+    <!--DELETE FROM tb_users WHERE id = #{id}-->
+    <!--</delete>-->
+    <!--<update id="updateUserbyid">SET-->
+    <!--UPDATE tb_users-->
+    <!--userName = #{userName} ,-->
+    <!--password = #{password} ,-->
+    <!--profile = #{profile} ,-->
+    <!--lasttime = #{lasttime} ,-->
+    <!--recenttime = #{recenttime} ,-->
+    <!--lastip = #{lastip} ,-->
+    <!--recentip = #{recentip} ,-->
+    <!--permission = #{permission}-->
+    <!--WHERE id = #{id};-->
+
+    <!--</update>-->
+
+    <!--<select id="checkadmin" resultType="Boolean">-->
+    <!--select case-->
+    <!--when exists (select username password from tb_users where username = #{username} and password=#{password})-->
+    <!--then-->
+    <!--1-->
+    <!--else 0 end as result-->
+    <!--</select>-->
+</mapper>

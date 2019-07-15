@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.ordersmapper">
+    <select id="getordersbyid" resultType="orders">
+        select * from orders where orderid =#{id};
+    </select>
+    <!--<select id="getordersbyidresultmap" resultMap="orders">-->
+        <!--select * from orders where orderid =#{id};-->
+    <!--</select>-->
+    <insert id="addorders">
+    INSERT INTO orders(orderNo,orderCount,orderTime,orderStatus,orderAddress,orderTotalprice,cid,goodid) VALUES ({#orders.orderNo},{#orders.orderCount},{#orders.orderTime},{#orders.orderStatus},{#orders.orderAddress},{#orders.orderTotalprice},{#orders.cid},{#orders.goodid);
+    </insert>
+    <update id="updataorders">
+    update orders orderNo=#{orderNo},orderCount=#{orderCount},orderTime=#{orderTime},orderStatus=#{orderStatus},orderAddress=#{orderAddress},orderTotalprice=#{orderTotalprice},cid=#{cid},goodid=#{goodid} where orderid = #{orders.id};
+    </update>
+    <delete id="deleteordersbyid">
+        delete from orders where ordersid = #{id};
+    </delete>
+    <select id="findordersByname" resultType="List">
+        select * from orders where orderNo =%#{orderNo}%;
+    </select>
+
+    <select id="countall" resultType="String">
+        select count(*) from orders;
+    </select>
+</mapper>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.categorymapper">
+    <select id="getcategorybyid" resultType="category">
+        select * from category where cateid =#{id};
+    </select>
+    <!--<select id="getcategorybyidresultmap" ="category">-->
+        <!--select * from category where cateid =#{id};-->
+    <!--</select>-->
+    <insert id="addcategory">
+    INSERT INTO category(cateName,cateDes) VALUES (#{category.cateName},#{category.cateDes});
+    </insert>
+    <update id="updatacategory">
+    update category cateName = #{category.cateName},cateDes = #{category.cateDes} where id = #{category.id};
+    </update>
+    <delete id="deletecategorybyid">
+        delete from category where cateid = #{id};
+    </delete>
+    <select id="findcategoryByname" resultType="List">
+        select * from category where cateName =%#{cateName}%;
+    </select>
+
+    <select id="countall" resultType="String">
+        select count(*) from category;
+    </select>
+</mapper>

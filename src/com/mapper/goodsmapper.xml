@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.goodsmapper">
+    <select id="getgoodsbyid" resultType="goods">
+        select * from goods where goodsid =#{id};
+    </select>
+    <!--<select id="getgoodsbyidresultmap" resultMap="goods">-->
+        <!--select * from goods where goddsid =#{id};-->
+    <!--</select>-->
+    <insert id="addgoods">
+    INSERT INTO goods(goodsName,goodsPrice,goodTotal,catesid) VALUES (#{goods.goodsName},#{goods.goodsPrice}.#{good.goodTotal},#{goods.catesid});
+    </insert>
+    <update id="updatagoods">
+    update goods goodsName = #{goods.goodsName},goodsPrice = #{goods.goodsPrice},goodTotal=#{goodTotal},catesid=#{catesid} where goodsid = #{goods.id};
+    </update>
+    <delete id="deletegoodsbyid">
+        delete from goods where goodsid = #{id};
+    </delete>
+    <select id="findgoodsByname" resultType="List">
+        select * from goods where goodsName = %#{goodsName}%;
+    </select>
+
+    <select id="countall" resultType="String">
+        select count(*) from goods;
+    </select>
+</mapper>
